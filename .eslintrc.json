@@ -4,7 +4,9 @@
     "es2021": true
   },
   "extends": [
-    "eslint:recommended",
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb/hooks",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:react/jsx-runtime",
@@ -18,13 +20,15 @@
     },
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "project": [ "./tsconfig.json" ]
   },
   "plugins": [
     "react",
     "@typescript-eslint"
   ],
   "rules": {
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["vite.config.ts","**/*.test.ts", "**/*.test.tsx"]}],
+
     "react/jsx-filename-extension": [
       2,
       {
@@ -56,6 +60,10 @@
       ]
     },
     "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
+      },
       "alias": {
         "map": [
           [
