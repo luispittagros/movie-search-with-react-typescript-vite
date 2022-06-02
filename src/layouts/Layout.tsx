@@ -10,9 +10,7 @@ const Layout = ({ children }: LayoutProps) => (
     <header>
       <Logo />
     </header>
-    <main>
-      {children}
-    </main>
+    <main>{children}</main>
   </>
 );
 
