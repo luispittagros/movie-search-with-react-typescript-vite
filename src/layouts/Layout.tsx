@@ -1,16 +1,14 @@
-import type { ReactNode } from 'react';
 import { ReactComponent as Logo } from '@/assets/svg/logo.svg';
+import { Outlet } from 'react-router-dom';
 
-type LayoutProps = {
-  children: ReactNode;
-};
-
-const Layout = ({ children }: LayoutProps) => (
+const Layout = () => (
   <>
     <header>
       <Logo />
     </header>
-    <main>{children}</main>
+    <main>
+      <Outlet />
+    </main>
   </>
 );
 

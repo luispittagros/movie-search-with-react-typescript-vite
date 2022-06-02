@@ -1,10 +1,13 @@
-import './App.css';
-import Layout from '@/layouts/Layout';
+import './App.scss';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routes from '@/Routes';
 
-const App = () => (
-  <Layout>
-    <h1>Hello World</h1>
-  </Layout>
-);
+const App = () => {
+  return (
+    <Router>
+      <Routes />
+    </Router>
+  );
+};
 
 export default App;
