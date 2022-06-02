@@ -4,6 +4,7 @@
     "es2021": true
   },
   "extends": [
+    "eslint:recommended",
     "airbnb",
     "airbnb-typescript",
     "airbnb/hooks",
@@ -11,7 +12,8 @@
     "plugin:react-hooks/recommended",
     "plugin:react/jsx-runtime",
     "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -20,15 +22,27 @@
     },
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": [ "./tsconfig.json" ]
+    "project": [
+      "./tsconfig.json"
+    ]
   },
   "plugins": [
     "react",
     "@typescript-eslint"
   ],
   "rules": {
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["vite.config.ts","**/*.test.ts", "**/*.test.tsx"]}],
+    "prettier/prettier": "error",
 
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "vite.config.ts",
+          "**/*.test.ts",
+          "**/*.test.tsx"
+        ]
+      }
+    ],
     "react/jsx-filename-extension": [
       2,
       {
@@ -85,6 +99,10 @@
           ".tsx"
         ]
       }
+    },
+
+    "react": {
+      "version": "detect"
     }
   }
 }

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 :root {
   --yellow: #ff9e1c;
   --red: #fe403f;
@@ -18,16 +20,45 @@
   --text-disabled: var(--mid-grey);
 
   --font-family: 'Roboto', sans-serif;
-  --font-size-base: 1rem;
+
+  --font-size-xsmall: 0.75rem;
+  --font-size-small: 0.875rem;
+  --font-size-base: 1.3333rem;
+  --font-size-medium: 1.6667rem;
+  --font-size-large: 2rem;
+  --font-size-xlarge: 6.6667rem;
+
+  --font-letter-spacing-base: 0.0133rem;
+  --font-letter-spacing-medium: 0.0167rem;
+  --font-letter-spacing-large: 0.0167rem;
+  --font-letter-spacing-xlarge: 0.0667rem;
+
+  --font-line-height-base: 1.5;
+  --font-line-height-medium: 1.5;
+  --font-line-height-large: 1.5;
+  --font-line-height-xlarge: 7.3333rem;
+
+  --font-weight-base: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
 }
 
 body {
   background-color: var(--background-color);
   color: var(--text-color);
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.5;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-base);
+  font-size: var(--font-size-base);
+  line-height: var(--font-line-height-base);
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-line-height-xlarge);
+  letter-spacing: var(--font-letter-spacing-xlarge);
   margin: 0;
   padding: 0;
 }

@@ -1,0 +1,17 @@
+$colors: (
+        yellow: #ff9e1c,
+        red: #fe403f,
+        green: #2dc4b6,
+        dark: #2dc4b6,
+        grey: #1c2328,
+        midgrey: #353f4c,
+        lightgrey: #798b99,
+        white: #fff,
+);
+
+@function color($name) {
+  @return $colors[$name];
+}
+
+
+
