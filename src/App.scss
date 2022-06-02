@@ -1,0 +1,33 @@
+:root {
+  --yellow: #ff9e1c;
+  --red: #fe403f;
+  --green: #2dc4b6;
+  --dark: #0A1014;
+  --grey: #1c2328;
+  --mid-grey: #353f4c;
+  --light-grey: #798b99;
+  --white: #fff;
+
+  --background-color: var(--dark);
+
+  --text-color: var(--white);
+  --text-secondary: var(--light-grey);
+  --text-highlight: var(--yellow);
+  --text-danger: var(--red);
+  --text-success: var(--green);
+  --text-disabled: var(--mid-grey);
+
+  --font-family: 'Roboto', sans-serif;
+  --font-size-base: 1rem;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
