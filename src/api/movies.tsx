@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_OMDB_API_URL,
@@ -7,7 +7,7 @@ const api = axios.create({
   },
 });
 
-const searchMovies = async (query: string, page = 1) => {
+export const searchMovies = async (query: string, page = 1) => {
   return api.get<OMDBSearchResponse>('/', {
     params: {
       s: query,
@@ -17,4 +17,15 @@ const searchMovies = async (query: string, page = 1) => {
   });
 };
 
-export default searchMovies;
+export const fetchMovie = async (id: string) => {
+  return api.get<OMDBMovieResponse>('/', {
+    params: {
+      i: id,
+      plot: 'short',
+    },
+  });
+};
+
+export default {
+  searchMovies,
+};

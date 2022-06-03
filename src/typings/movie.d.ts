@@ -1,10 +1,18 @@
-type Movie = {
+interface Movie {
   id: string;
   title: string;
   year: string;
   poster: string;
+  runtime?: string;
+  rated?: string;
+  plot?: string;
+  genres?: string[];
+  directors?: string[];
+  cast?: string[];
+  rottenTomatoes?: string;
+  imdbRating?: string;
   isFavorite?: boolean;
-};
+}
 
 type OMDBMovie = {
   Title: string;
@@ -19,4 +27,21 @@ type OMDBSearchResponse = {
   Search?: OMDBMovie[];
   totalResults?: string;
   Error?: string;
+};
+
+type OMDBMovieResponse = {
+  Title: string;
+  Plot: string;
+  Actors: string;
+  Genre: string;
+  Director: string;
+  Rated: string;
+  Poster: string;
+  Runtime: string;
+  Ratings: {
+    Source: string;
+    Value: string;
+  }[];
+  Year: string;
+  imdbRating: string;
 };

@@ -2,7 +2,7 @@ import { useAtom } from 'jotai';
 import { moviesStore, loadingMovies, searchTerm } from '@/store/movies';
 import '@/components/search/SearchBar.scss';
 import { ChangeEvent, useCallback } from 'react';
-import searchMovies from '@/api/movies';
+import { searchMovies } from '@/api/movies';
 import debounce from 'lodash.debounce';
 
 const SearchBar = () => {
