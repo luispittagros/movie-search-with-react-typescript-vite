@@ -1,0 +1,19 @@
+.search-bar {
+  display: flex;
+
+  input {
+    font-size: var(--font-size-small);
+    padding: 12px;
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+
+    &:focus {
+      outline: none;
+    }
+
+    ::placeholder {
+      color: var(--text-color-gray);
+    }
+  }
+}
