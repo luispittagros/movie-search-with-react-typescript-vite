@@ -13,7 +13,7 @@ const Routes = () => {
           element: <Home />,
         },
         {
-          path: 'movie/:id',
+          path: '/movies/:id',
           element: <Movie />,
         },
       ],

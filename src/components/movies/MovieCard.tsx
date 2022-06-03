@@ -1,12 +1,10 @@
 import { createElement, memo } from 'react';
 import { generatePath, Link } from 'react-router-dom';
 
-import {
-  ReactComponent as HeartWhite,
-  ReactComponent as HeartFull,
-} from '@/assets/svg/icons/icon-heart-white.svg';
+import { ReactComponent as HeartWhite } from '@/assets/svg/icons/icon-heart-white.svg';
+import { ReactComponent as HeartFull } from '@/assets/svg/icons/icon-heart-full.svg';
 
-import '@/components/movie/MovieCard.scss';
+import '@/components/movies/MovieCard.scss';
 
 interface MovieCardProps {
   movie: Movie;
@@ -28,6 +26,7 @@ const MovieCard = ({
           type="button"
           className="movie-card__overview-favorite"
           onClick={() => handleFavorite(id)}
+          aria-label="favorite"
         >
           {createElement(heartIcon)}
         </button>
