@@ -1,0 +1,17 @@
+.back-button {
+  cursor: pointer;
+  
+  svg {
+    path, polyline {
+      transition: 0.25s ease-in-out;
+    }
+  }
+
+  &:hover {
+    svg {
+      path, polyline {
+        stroke: var(--white);
+      }
+    }
+  }
+}
