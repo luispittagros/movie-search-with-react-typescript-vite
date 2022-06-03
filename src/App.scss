@@ -49,8 +49,9 @@ body {
   color: var(--text-color);
   font-family: var(--font-family);
   font-weight: var(--font-weight-base);
-  font-size: var(--font-size-base);
-  line-height: var(--font-line-height-base);
+  font-size: 16px;
+  letter-spacing: 0.17px;
+  line-height: 24px;
   margin: 0;
   padding: 0;
 }
@@ -78,9 +79,9 @@ h1, h2 {
 
 h1 {
   font-size: var(--font-size-xlarge);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--font-line-height-xlarge);
-  letter-spacing: var(--font-letter-spacing-xlarge);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--font-line-height-medium);
+  letter-spacing: var(--font-letter-spacing-medium);
 }
 
 h2 {
