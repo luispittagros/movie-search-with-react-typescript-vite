@@ -1,3 +1,7 @@
-const Home = () => <h1>Home</h1>;
+import Movies from '@/components/movies/Movies';
+
+const Home = () => {
+  return <Movies />;
+};
 
 export default Home;
