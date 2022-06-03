@@ -1,34 +1,55 @@
-import { createElement, memo } from 'react';
+import { FC, memo } from 'react';
 import { generatePath, Link } from 'react-router-dom';
+import clsx from 'clsx';
 
-import { ReactComponent as HeartWhite } from '@/assets/svg/icons/icon-heart-white.svg';
-import { ReactComponent as HeartFull } from '@/assets/svg/icons/icon-heart-full.svg';
+import { ReactComponent as Heart } from '@/assets/svg/icons/icon-heart.svg';
+
+import { moviesStore } from '@/store/movies';
+import { useAtom } from 'jotai';
 
 import '@/components/movies/MovieCard.scss';
 
 interface MovieCardProps {
   movie: Movie;
-  handleFavorite: (id: string) => void;
 }
 
-const MovieCard = ({
+const MovieCard: FC<MovieCardProps> = ({
   movie: { id, title, year, poster, isFavorite = false },
-  handleFavorite,
-}: MovieCardProps) => {
-  const heartIcon = isFavorite ? HeartFull : HeartWhite;
+}) => {
+  const [, setMovies] = useAtom(moviesStore);
+
+  const toggleFavorite = (movieId: string) => {
+    setMovies((movies) => {
+      const newMovies = [...movies];
+
+      const movieFound = newMovies.find((movie) => movie.id === movieId);
+
+      if (movieFound) {
+        movieFound.isFavorite = !movieFound.isFavorite;
+      }
+
+      return newMovies;
+    });
+  };
 
   const moviesPath = generatePath('/movies/:id', { id });
 
   return (
-    <li className="movie-card" style={{ backgroundImage: `url(${poster})` }}>
+    <li
+      className={clsx('movie-card', isFavorite && 'movie-card--favorite')}
+      style={{ backgroundImage: `url(${poster})` }}
+    >
       <Link to={moviesPath} className="movie-card__overview">
         <button
           type="button"
           className="movie-card__overview-favorite"
-          onClick={() => handleFavorite(id)}
+          onClick={(e) => {
+            e.preventDefault();
+            toggleFavorite(id);
+          }}
           aria-label="favorite"
         >
-          {createElement(heartIcon)}
+          <Heart />
         </button>
 
         <h2 className="movie-card__overview-title">{title}</h2>
