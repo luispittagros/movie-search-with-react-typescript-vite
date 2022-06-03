@@ -1,5 +1,20 @@
 import { atom } from 'jotai';
 
-const moviesStore = atom<Movie[]>([]);
+export const moviesStore = atom<Movie[]>([]);
 
-export default moviesStore;
+export const loadingMovies = atom(false);
+
+export const searchTerm = atom('');
+
+export const movieId = atom('');
+
+export const getMovie = atom((get) =>
+  get(moviesStore).find((movie: Movie) => movie.id === get(movieId)),
+);
+
+export default {
+  moviesStore,
+  loadingMovies,
+  searchTerm,
+  getMovie,
+};
