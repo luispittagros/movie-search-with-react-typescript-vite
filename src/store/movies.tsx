@@ -6,15 +6,10 @@ export const loadingMovies = atom(false);
 
 export const searchTerm = atom('');
 
-export const movieId = atom('');
-
-export const getMovie = atom((get) =>
-  get(moviesStore).find((movie: Movie) => movie.id === get(movieId)),
-);
+export const movieStore = atom<Movie>({} as Movie);
 
 export default {
   moviesStore,
   loadingMovies,
   searchTerm,
-  getMovie,
 };
