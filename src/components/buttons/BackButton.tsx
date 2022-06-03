@@ -17,4 +17,5 @@ const BackButton: FC = () => {
     </button>
   );
 };
+
 export default BackButton;
