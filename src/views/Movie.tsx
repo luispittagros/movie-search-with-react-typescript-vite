@@ -54,8 +54,8 @@ const Movie = () => {
       <div className="movie">
         <div className="movie__info">
           <div className="movie__meta">
-            <TextLabel>{movie.runtime}</TextLabel> ·
-            <TextLabel>{movie.year}</TextLabel> ·
+            <TextLabel>{movie.runtime}</TextLabel>
+            <TextLabel>{movie.year}</TextLabel>
             <TextLabel filled>{movie.rated}</TextLabel>
           </div>
 
