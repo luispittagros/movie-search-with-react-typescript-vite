@@ -9,6 +9,12 @@
   overflow: hidden;
   aspect-ratio: 0.75;
 
+  @supports not (aspect-ratio: auto) {
+    padding-top: 133.3%;
+    height: 0;
+    position: relative;
+    overflow: hidden;
+  }
 
   &--favorite {
     &:not(:hover) {
