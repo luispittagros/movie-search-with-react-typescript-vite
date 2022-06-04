@@ -1,4 +1,5 @@
 import { FC, memo, ReactNode } from 'react';
+import PropTypes from 'prop-types';
 
 import '@/components/labels/LogoLabel.scss';
 
@@ -23,6 +24,12 @@ const LogoLabel: FC<LabelProps> = ({ children, logo, color }) => {
       <span className="logo-label__info">{children}</span>
     </div>
   );
+};
+
+LogoLabel.propTypes = {
+  logo: PropTypes.node.isRequired,
+  color: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default memo(LogoLabel);

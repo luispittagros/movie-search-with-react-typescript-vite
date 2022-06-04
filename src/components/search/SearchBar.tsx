@@ -1,4 +1,5 @@
 import { ChangeEvent, FC, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { useAtom } from 'jotai';
 import debounce from 'lodash.debounce';
 import { moviesStore, loadingMovies, searchQuery } from '@/store/movies';
@@ -67,5 +68,9 @@ const SearchBar: FC<SearchBarProps> = ({ disabled }) => {
 };
 
 SearchBar.defaultProps = defaultProps;
+
+SearchBar.propTypes = {
+  disabled: PropTypes.bool,
+};
 
 export default SearchBar;

@@ -2,9 +2,8 @@ import { useAtom } from 'jotai';
 import { moviesStore } from '@/store/movies';
 import MovieCard from '@/components/movies/MovieCard';
 import '@/components/movies/Movies.scss';
-import { FC } from 'react';
 
-const Movies: FC = () => {
+const Movies = () => {
   const [movies] = useAtom(moviesStore);
 
   return (

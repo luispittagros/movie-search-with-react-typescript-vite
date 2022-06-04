@@ -8,6 +8,7 @@ import { moviesStore } from '@/store/movies';
 import { useAtom } from 'jotai';
 
 import '@/components/movies/MovieCard.scss';
+import PropTypes from 'prop-types';
 
 interface MovieCardProps {
   movie: Movie;
@@ -57,6 +58,16 @@ const MovieCard: FC<MovieCardProps> = ({
       </Link>
     </li>
   );
+};
+
+MovieCard.propTypes = {
+  movie: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    year: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool,
+  }).isRequired,
 };
 
 export default memo(MovieCard);

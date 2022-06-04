@@ -11,7 +11,7 @@ interface Movie {
   cast?: string[];
   rottenTomatoes?: string;
   imdbRating?: string;
-  isFavorite?: boolean;
+  isFavorite?: boolean | null;
 }
 
 type OMDBMovie = {
