@@ -47,6 +47,8 @@ const Movie = () => {
     fetchData().then(setMovie).catch(console.error);
   }, [setMovie, id]);
 
+  const toggleFavorite = () => {};
+
   if (!movie) return <div>Movie not found</div>;
 
   return (
@@ -76,7 +78,11 @@ const Movie = () => {
               </LogoLabel>
             )}
 
-            <Button icon={<Heart />} active>
+            <Button
+              icon={<Heart />}
+              active={!!movie.isFavorite}
+              onClick={toggleFavorite}
+            >
               Add to favourites
             </Button>
           </div>
