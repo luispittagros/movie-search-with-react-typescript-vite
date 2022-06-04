@@ -12,7 +12,12 @@ const BackButton: FC = () => {
   };
 
   return (
-    <button className="back-button" onClick={handleClick} type="button">
+    <button
+      className="back-button"
+      onClick={handleClick}
+      type="button"
+      aria-label="back"
+    >
       <Arrow />
     </button>
   );
