@@ -1,18 +1,20 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { movieStore } from '@/store/movies';
 import { useAtom } from 'jotai';
+
+import { movieStore } from '@/store/movies';
 import { fetchMovie } from '@/api/movies';
+
 import BackButton from '@/components/buttons/BackButton';
-import { FC, useEffect } from 'react';
+import LogoLabel from '@/components/labels/LogoLabel';
+import TextLabel from '@/components/labels/TextLabel';
 
 import { ReactComponent as IMDBLogo } from '@/assets/svg/logos/logo-imdb.svg';
 import { ReactComponent as RottenTomatoesLogo } from '@/assets/svg/logos/logo-rotten-tomatoes.svg';
 
 import '@/views/Movie.scss';
-import LogoLabel from '@/components/labels/LogoLabel';
-import TextLabel from '@/components/labels/TextLabel';
 
-const Movie: FC = () => {
+const Movie = () => {
   const { id = '' } = useParams();
   const [movie, setMovie] = useAtom(movieStore);
 
@@ -40,9 +42,7 @@ const Movie: FC = () => {
       };
     };
 
-    fetchData()
-      .then((data) => setMovie(data))
-      .catch(console.error);
+    fetchData().then(setMovie).catch(console.error);
   }, [setMovie, id]);
 
   if (!movie) return <div>Movie not found</div>;
@@ -62,9 +62,11 @@ const Movie: FC = () => {
           <h1 className="movie__title">{movie.title}</h1>
 
           <div className="movie__rating">
-            <LogoLabel logo={<IMDBLogo />} color="--yellow">
-              {movie.imdbRating}
-            </LogoLabel>
+            {movie.imdbRating && (
+              <LogoLabel logo={<IMDBLogo />} color="--yellow">
+                {movie.imdbRating}
+              </LogoLabel>
+            )}
 
             {movie.rottenTomatoes && (
               <LogoLabel logo={<RottenTomatoesLogo />} color="--red">

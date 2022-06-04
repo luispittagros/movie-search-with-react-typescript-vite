@@ -1,9 +1,9 @@
-import { useAtom } from 'jotai';
-import { moviesStore, loadingMovies, searchQuery } from '@/store/movies';
-import '@/components/search/SearchBar.scss';
 import { ChangeEvent, FC, useCallback } from 'react';
-import { searchMovies } from '@/api/movies';
+import { useAtom } from 'jotai';
 import debounce from 'lodash.debounce';
+import { moviesStore, loadingMovies, searchQuery } from '@/store/movies';
+import { searchMovies } from '@/api/movies';
+import '@/components/search/SearchBar.scss';
 
 import { ReactComponent as IconMagnifier } from '@/assets/svg/icons/icon-magnifier.svg';
 import clsx from 'clsx';
