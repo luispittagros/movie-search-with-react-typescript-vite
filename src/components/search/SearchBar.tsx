@@ -1,13 +1,14 @@
-import { ChangeEvent, FC, useCallback } from 'react';
+import { ChangeEvent, FC, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useAtom } from 'jotai';
+import clsx from 'clsx';
 import debounce from 'lodash.debounce';
-import { moviesStore, loadingMovies, searchQuery } from '@/store/movies';
-import { searchMovies } from '@/api/movies';
-import '@/components/search/SearchBar.scss';
+import useMovieSearch from '@/hooks/useMovieSearch';
+import { searchQueryAtom, searchPageAtom } from '@/store/movies';
 
 import { ReactComponent as IconMagnifier } from '@/assets/svg/icons/icon-magnifier.svg';
-import clsx from 'clsx';
+
+import '@/components/search/SearchBar.scss';
 
 interface SearchBarProps {
   disabled?: boolean;
@@ -18,40 +19,21 @@ const defaultProps = {
 };
 
 const SearchBar: FC<SearchBarProps> = ({ disabled }) => {
-  const [, setMovies] = useAtom(moviesStore);
-  const [, setLoading] = useAtom(loadingMovies);
-  const [search, setSearchQuery] = useAtom(searchQuery);
+  const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
+  const [searchPage, setSearchPage] = useAtom(searchPageAtom);
 
-  const debouncedHandleChange = useCallback(
-    debounce(async (e: ChangeEvent<HTMLInputElement>): Promise<void> => {
-      const { value } = e.target;
-
-      setSearchQuery(value);
-
-      try {
-        setLoading(true);
-
-        const { data } = await searchMovies(value);
-
-        const results = data.Search?.map<Movie>((movie) => ({
-          id: movie.imdbID,
-          title: movie.Title,
-          year: movie.Year,
-          poster: movie.Poster,
-          isFavorite: false,
-        }));
-
-        if (results) {
-          setMovies(results);
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    }, 500),
-    [debounce, setMovies, setLoading, setSearchQuery],
+  const handleChange = debounce(
+    useCallback(
+      (e: ChangeEvent<HTMLInputElement>) => {
+        setSearchPage(1);
+        setSearchQuery(e.target.value);
+      },
+      [setSearchPage, setSearchQuery],
+    ),
+    350,
   );
+
+  useMovieSearch(searchQuery, searchPage);
 
   return (
     <div className={clsx('search-bar', disabled && 'search-bar--disabled')}>
@@ -60,7 +42,7 @@ const SearchBar: FC<SearchBarProps> = ({ disabled }) => {
       <input
         type="text"
         placeholder="Search movies..."
-        onChange={debouncedHandleChange}
+        onChange={handleChange}
         disabled={disabled}
       />
     </div>

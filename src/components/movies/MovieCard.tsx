@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import { ReactComponent as Heart } from '@/assets/svg/icons/icon-heart.svg';
 
-import { moviesStore } from '@/store/movies';
+import { moviesAtom } from '@/store/movies';
 import { useAtom } from 'jotai';
 
 import '@/components/movies/MovieCard.scss';
@@ -17,7 +17,7 @@ interface MovieCardProps {
 const MovieCard: FC<MovieCardProps> = ({
   movie: { id, title, year, poster, isFavorite = false },
 }) => {
-  const [, setMovies] = useAtom(moviesStore);
+  const [, setMovies] = useAtom(moviesAtom);
 
   const toggleFavorite = (movieId: string) => {
     setMovies((movies) => {

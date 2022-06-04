@@ -21,20 +21,20 @@
 
   --font-family: 'Roboto', sans-serif;
 
-  --font-size-base: 16px;
-  --font-size-medium: 20px;
-  --font-size-large: 24px;
-  --font-size-xlarge: 80px;
+  --font-size-base: 1rem;
+  --font-size-medium: 1.25rem;
+  --font-size-large: 1.5rem;
+  --font-size-xlarge: 5rem;
 
-  --font-letter-spacing-base: 0.16px;
-  --font-letter-spacing-medium: 0.26px;
-  --font-letter-spacing-large: 0.26px;
-  --font-letter-spacing-xlarge: 0.88px;
+  --font-letter-spacing-base: 0.01rem;
+  --font-letter-spacing-medium: 0.016rem;
+  --font-letter-spacing-large: 0.016rem;
+  --font-letter-spacing-xlarge: 0.055rem;
 
-  --font-line-height-base: 24px;
-  --font-line-height-medium: 28px;
-  --font-line-height-large: 30px;
-  --font-line-height-xlarge: 88px;
+  --font-line-height-base: 1.5rem;
+  --font-line-height-medium: 1.75rem;
+  --font-line-height-large: 1.875rem;
+  --font-line-height-xlarge: 5.5rem;
 
   --font-weight-base: 400;
   --font-weight-medium: 500;
@@ -46,9 +46,9 @@ body {
   color: var(--text-color);
   font-family: var(--font-family);
   font-weight: var(--font-weight-base);
-  font-size: 16px;
-  letter-spacing: 0.17px;
-  line-height: 24px;
+  font-size: varr(--font-size-base);
+  letter-spacing: var(--font-letter-spacing-base);
+  line-height: var(--font-line-height-base);
   margin: 0;
   padding: 0;
 }
@@ -76,9 +76,9 @@ h1, h2 {
 
 h1 {
   font-size: var(--font-size-xlarge);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--font-line-height-medium);
-  letter-spacing: var(--font-letter-spacing-medium);
+  font-weight: var(--font-weight-xlarge);
+  line-height: var(--font-line-height-xlarge);
+  letter-spacing: var(--font-letter-spacing-xlarge);
 }
 
 h2 {
@@ -90,8 +90,8 @@ h2 {
 
 .layout {
   width: 81.94vw;
-  margin: 0 auto;
   max-width: 1440px;
+  margin: 0 auto;
 }
 
 header {

@@ -1,16 +1,22 @@
 import { atom } from 'jotai';
 
-export const moviesStore = atom<Movie[]>([]);
+export const moviesAtom = atom<Movie[]>([]);
 
-export const loadingMovies = atom(false);
+export const loadingAtom = atom(false);
 
-export const searchQuery = atom('');
+export const errorAtom = atom(false);
 
-export const movieStore = atom<Movie>({} as Movie);
+export const searchQueryAtom = atom('');
+
+export const searchPageAtom = atom(1);
+
+export const movieAtom = atom<Movie>({} as Movie);
 
 export default {
-  moviesStore,
-  loadingMovies,
-  searchQuery,
-  movieStore,
+  loadingAtom,
+  errorAtom,
+  moviesAtom,
+  movieAtom,
+  searchQueryAtom,
+  searchPageAtom,
 };

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAtom } from 'jotai';
 
-import { movieStore } from '@/store/movies';
+import { movieAtom } from '@/store/movies';
 import { fetchMovie } from '@/api/movies';
 
 import BackButton from '@/components/buttons/BackButton';
@@ -18,7 +18,7 @@ import Button from '@/components/buttons/Button';
 
 const Movie = () => {
   const { id = '' } = useParams();
-  const [movie, setMovie] = useAtom(movieStore);
+  const [movie, setMovie] = useAtom(movieAtom);
 
   useEffect(() => {
     const fetchData = async (): Promise<Movie> => {

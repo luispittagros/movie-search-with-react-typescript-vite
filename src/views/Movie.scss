@@ -15,7 +15,7 @@
     margin-right: 6.94vw;
   }
 
-  &__meta, &__rating, &__title, &__plot, &__details {
+  &__meta, &__title, &__plot, &__details {
     margin: 20px 0;
   }
 
@@ -34,17 +34,21 @@
 
   &__rating {
     display: flex;
+    flex-flow: row wrap;
+    margin-top: 20px;
 
-    > div {
+    > div:not(:last-child), button:not(:last-child) {
       margin-right: 16px;
+    }
+
+    > div, button {
+      margin-bottom: 20px;
     }
   }
 
   &__title {
-    font-size: 6rem;
-    color: var(--white);
-    letter-spacing: 0.87px;
-    line-height: 88px;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   &__details {

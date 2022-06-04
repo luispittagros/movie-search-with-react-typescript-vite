@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { CancelTokenSource } from 'axios';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_OMDB_API_URL,
@@ -7,13 +7,18 @@ const api = axios.create({
   },
 });
 
-export const searchMovies = async (query: string, page = 1) => {
+export const searchMovies = async (
+  query: string,
+  page: number,
+  cancelTokenSource: CancelTokenSource,
+) => {
   return api.get<OMDBSearchResponse>('/', {
     params: {
       s: query,
       type: 'movie',
       page,
     },
+    cancelToken: cancelTokenSource.token,
   });
 };
 
