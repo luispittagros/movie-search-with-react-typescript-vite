@@ -1,0 +1,52 @@
+.button {
+  $button: &;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 12px 16px 12px 12px;
+  border: 1px solid var(--mid-grey);
+  color: var(--mid-grey);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: 0.25s ease-out;
+
+  &--active {
+    background-color: var(--red);
+    color: var(--white);
+    border-color: var(--red);
+
+    #{$button}__icon {
+      svg {
+        path {
+          stroke: var(--white);
+          fill: var(--white);
+        }
+      }
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+
+    svg {
+      path {
+        transition: 0.25s ease-out;
+        stroke: var(--mid-grey);
+      }
+    }
+  }
+
+  &:hover {
+    border-color: var(--red);
+    color: var(--white);
+
+    svg {
+      path {
+        stroke: var(--white);
+      }
+    }
+  }
+}

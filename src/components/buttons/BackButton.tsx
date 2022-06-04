@@ -1,10 +1,9 @@
-import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Arrow } from '@/assets/svg/icons/icon-arrow.svg';
 
 import '@/components/buttons/BackButton.scss';
 
-const BackButton: FC = () => {
+const BackButton = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {

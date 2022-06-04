@@ -11,8 +11,10 @@ import TextLabel from '@/components/labels/TextLabel';
 
 import { ReactComponent as IMDBLogo } from '@/assets/svg/logos/logo-imdb.svg';
 import { ReactComponent as RottenTomatoesLogo } from '@/assets/svg/logos/logo-rotten-tomatoes.svg';
+import { ReactComponent as Heart } from '@/assets/svg/icons/icon-heart.svg';
 
 import '@/views/Movie.scss';
+import Button from '@/components/buttons/Button';
 
 const Movie = () => {
   const { id = '' } = useParams();
@@ -73,6 +75,10 @@ const Movie = () => {
                 {movie.rottenTomatoes}
               </LogoLabel>
             )}
+
+            <Button icon={<Heart />} active>
+              Add to favourites
+            </Button>
           </div>
 
           <div className="movie__plot">
