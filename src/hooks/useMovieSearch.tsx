@@ -1,13 +1,19 @@
 import { useEffect } from 'react';
 import { searchMovies } from '@/api/movies';
 import { useAtom } from 'jotai';
-import { errorAtom, loadingAtom, moviesAtom } from '@/store/movies';
+import {
+  errorAtom,
+  loadingAtom,
+  moviesAtom,
+  searchTotalResultsAtom,
+} from '@/store/movies';
 import axios from 'axios';
 
 const useMovieSearch = (query: string, page: number) => {
-  const [, setMovies] = useAtom(moviesAtom);
+  const [movies, setMovies] = useAtom(moviesAtom);
   const [, setLoading] = useAtom(loadingAtom);
   const [, setError] = useAtom(errorAtom);
+  const [, setSearchTotalResults] = useAtom(searchTotalResultsAtom);
 
   useEffect(() => {
     setLoading(true);
@@ -16,8 +22,8 @@ const useMovieSearch = (query: string, page: number) => {
     const cancelTokenSource = axios.CancelToken.source();
 
     searchMovies(query, page, cancelTokenSource)
-      .then(({ data }) => {
-        const results = data.Search?.map<Movie>((movie) => ({
+      .then(({ data: { Search, totalResults = '0' } }) => {
+        const results = Search?.map<Movie>((movie) => ({
           id: movie.imdbID,
           title: movie.Title,
           year: movie.Year,
@@ -25,7 +31,10 @@ const useMovieSearch = (query: string, page: number) => {
           isFavorite: false,
         }));
 
-        if (results) setMovies(results);
+        setSearchTotalResults(+totalResults);
+        setLoading(false);
+
+        if (results) setMovies([...movies, ...results]);
       })
       .catch((e) => {
         if (axios.isCancel(e)) return;
@@ -34,7 +43,7 @@ const useMovieSearch = (query: string, page: number) => {
       .finally(() => setLoading(false));
 
     return () => cancelTokenSource.cancel();
-  }, [query, page, setMovies, setLoading, setError]);
+  }, [query, page]);
 };
 
 export default useMovieSearch;
