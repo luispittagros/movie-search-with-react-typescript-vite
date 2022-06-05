@@ -11,7 +11,7 @@ interface ButtonProps {
   active?: boolean;
 }
 
-const buttonDefaultProps = {
+const defaultButtonProps = {
   onClick: () => {},
   active: false,
 };
@@ -24,12 +24,12 @@ const Button: FC<ButtonProps> = ({ children, icon, onClick, active }) => {
       type="button"
     >
       <div className="button__icon">{icon}</div>
-      <span>{children}</span>
+      <span className="button__text">{children}</span>
     </button>
   );
 };
 
-Button.defaultProps = buttonDefaultProps;
+Button.defaultProps = defaultButtonProps;
 
 Button.propTypes = {
   icon: PropTypes.node.isRequired,

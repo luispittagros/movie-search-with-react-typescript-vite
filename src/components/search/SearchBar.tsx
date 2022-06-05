@@ -4,7 +4,7 @@ import { useAtom } from 'jotai';
 import clsx from 'clsx';
 import debounce from 'lodash.debounce';
 import useMovieSearch from '@/hooks/useMovieSearch';
-import { searchQueryAtom, searchPageAtom } from '@/store/movies';
+import { searchQueryAtom, searchPageAtom, moviesAtom } from '@/store/movies';
 
 import { ReactComponent as IconMagnifier } from '@/assets/svg/icons/icon-magnifier.svg';
 
@@ -21,14 +21,16 @@ const defaultProps = {
 const SearchBar: FC<SearchBarProps> = ({ disabled }) => {
   const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
   const [searchPage, setSearchPage] = useAtom(searchPageAtom);
+  const [, setMovies] = useAtom(moviesAtom);
 
   const handleChange = debounce(
     useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
+        setMovies([]);
         setSearchPage(1);
         setSearchQuery(e.target.value);
       },
-      [setSearchPage, setSearchQuery],
+      [setMovies, setSearchPage, setSearchQuery],
     ),
     350,
   );
