@@ -34,11 +34,15 @@ const Movies = () => {
   if (loading && !movies.length) return <Loader />;
 
   return (
-    <ul className="movies" ref={element}>
-      {movies.map((movie, index) => (
-        <MovieCard key={`${movie.id}-${index}`} movie={movie} />
-      ))}
-    </ul>
+    <>
+      <ul className="movies" ref={element}>
+        {movies.map((movie, index) => (
+          <MovieCard key={`${movie.id}-${index}`} movie={movie} />
+        ))}
+      </ul>
+
+      {loading && <Loader small />}
+    </>
   );
 };
 

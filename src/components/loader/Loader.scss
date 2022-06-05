@@ -3,19 +3,26 @@
   width: 100px;
   height: 100px;
   margin: 100px auto;
-}
 
-.loader:before, .loader:after {
-  content: '';
-  border-radius: 50%;
-  position: absolute;
-  inset: 0;
-  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3) inset;
-}
+  &--small {
+    margin: 30px auto;
+    width: 60px;
+    height: 60px;
+  }
 
-.loader:after {
-  box-shadow: 0 2px 0 var(--yellow) inset;
-  animation: rotate 0.7s linear infinite;
+  &:before, &:after {
+    content: '';
+    border-radius: 50%;
+    position: absolute;
+    inset: 0;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3) inset;
+  }
+
+  &:after {
+    box-shadow: 0 2px 0 var(--yellow) inset;
+    animation: rotate 0.7s linear infinite;
+  }
+
 }
 
 @keyframes rotate {
