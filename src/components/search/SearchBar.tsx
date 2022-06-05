@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useCallback, useState } from 'react';
+import { ChangeEvent, FC, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useAtom } from 'jotai';
 import clsx from 'clsx';

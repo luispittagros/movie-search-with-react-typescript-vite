@@ -15,10 +15,12 @@ import { ReactComponent as Heart } from '@/assets/svg/icons/icon-heart.svg';
 
 import '@/views/Movie.scss';
 import Button from '@/components/buttons/Button';
+import useToggleFavoriteMovie from '@/hooks/useToggleFavoriteMovie';
 
 const Movie = () => {
   const { id = '' } = useParams();
   const [movie, setMovie] = useAtom(movieAtom);
+  const [isFavorite, toggleFavorite] = useToggleFavoriteMovie(id);
 
   useEffect(() => {
     const fetchData = async (): Promise<Movie> => {
@@ -46,8 +48,6 @@ const Movie = () => {
 
     fetchData().then(setMovie).catch(console.error);
   }, [setMovie, id]);
-
-  const toggleFavorite = () => {};
 
   if (!movie) return <div>Movie not found</div>;
 
@@ -80,7 +80,7 @@ const Movie = () => {
 
             <Button
               icon={<Heart />}
-              active={!!movie.isFavorite}
+              active={isFavorite}
               onClick={toggleFavorite}
             >
               Add to favourites

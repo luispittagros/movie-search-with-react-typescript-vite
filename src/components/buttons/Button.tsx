@@ -1,8 +1,8 @@
 import { FC, ReactNode } from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 
 import '@/components/buttons/Button.scss';
-import clsx from 'clsx';
 
 interface ButtonProps {
   children: ReactNode;

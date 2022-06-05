@@ -1,37 +1,22 @@
 import { FC, memo } from 'react';
 import { generatePath, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 import { ReactComponent as Heart } from '@/assets/svg/icons/icon-heart.svg';
 
-import { moviesAtom } from '@/store/movies';
-import { useAtom } from 'jotai';
+import useToggleFavoriteMovie from '@/hooks/useToggleFavoriteMovie';
 
 import '@/components/movies/MovieCard.scss';
-import PropTypes from 'prop-types';
 
 interface MovieCardProps {
   movie: Movie;
 }
 
 const MovieCard: FC<MovieCardProps> = ({
-  movie: { id, title, year, poster, isFavorite = false },
+  movie: { id, title, year, poster },
 }) => {
-  const [, setMovies] = useAtom(moviesAtom);
-
-  const toggleFavorite = (movieId: string) => {
-    setMovies((movies) => {
-      const newMovies = [...movies];
-
-      const movieFound = newMovies.find((movie) => movie.id === movieId);
-
-      if (movieFound) {
-        movieFound.isFavorite = !movieFound.isFavorite;
-      }
-
-      return newMovies;
-    });
-  };
+  const [isFavorite, toggleFavorite] = useToggleFavoriteMovie(id);
 
   const moviesPath = generatePath('/movies/:id', { id });
 
@@ -46,7 +31,7 @@ const MovieCard: FC<MovieCardProps> = ({
           className="movie-card__overview-favorite"
           onClick={(e) => {
             e.preventDefault();
-            toggleFavorite(id);
+            toggleFavorite();
           }}
           aria-label="favorite"
         >
@@ -66,7 +51,6 @@ MovieCard.propTypes = {
     title: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
-    isFavorite: PropTypes.bool,
   }).isRequired,
 };
 

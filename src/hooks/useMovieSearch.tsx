@@ -28,7 +28,6 @@ const useMovieSearch = (query: string, page: number) => {
           title: movie.Title,
           year: movie.Year,
           poster: movie.Poster,
-          isFavorite: false,
         }));
 
         setSearchTotalResults(+totalResults);
