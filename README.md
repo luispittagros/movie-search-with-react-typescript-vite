@@ -1,5 +1,5 @@
 # MoFlix
-A Movie Search SPA using react, typescript and vite.
+A Movie Search SPA using React, Typescript and Vite.
 
 ## Setup
 
