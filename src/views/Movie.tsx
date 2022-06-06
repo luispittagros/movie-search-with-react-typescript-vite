@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAtom } from 'jotai';
 
@@ -16,14 +16,19 @@ import { ReactComponent as Heart } from '@/assets/svg/icons/icon-heart.svg';
 import '@/views/Movie.scss';
 import Button from '@/components/buttons/Button';
 import useToggleFavoriteMovie from '@/hooks/useToggleFavoriteMovie';
+import Loader from '@/components/loader/Loader';
+import MovieNotFound from '@/components/movies/MovieNotFound';
 
 const Movie = () => {
   const { id = '' } = useParams();
   const [movie, setMovie] = useAtom(movieAtom);
   const [isFavorite, toggleFavorite] = useToggleFavoriteMovie(id);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async (): Promise<Movie> => {
+      setIsLoading(true);
+
       const { data } = await fetchMovie(id);
 
       return {
@@ -46,7 +51,10 @@ const Movie = () => {
       };
     };
 
-    fetchData().then(setMovie).catch(console.error);
+    fetchData()
+      .then(setMovie)
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
 
     return () => setMovie(null);
   }, [setMovie, id]);
@@ -62,7 +70,9 @@ const Movie = () => {
     });
   }, [toggleFavorite, movie]);
 
-  if (!movie) return <h1>Sorry, the movie was not found</h1>;
+  if (isLoading) return <Loader />;
+
+  if (!movie) return <MovieNotFound />;
 
   return (
     <>
