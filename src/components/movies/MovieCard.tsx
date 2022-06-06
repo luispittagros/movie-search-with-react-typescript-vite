@@ -1,4 +1,4 @@
-import { FC, memo } from 'react';
+import { FC, memo, MouseEvent } from 'react';
 import { generatePath, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -20,6 +20,17 @@ const MovieCard: FC<MovieCardProps> = ({
 
   const moviesPath = generatePath('/movies/:id', { id });
 
+  const handleClick = (e: MouseEvent) => {
+    e.preventDefault();
+
+    toggleFavorite({
+      id,
+      title,
+      poster,
+      year,
+    });
+  };
+
   return (
     <li
       className={clsx('movie-card', isFavorite && 'movie-card--favorite')}
@@ -29,10 +40,7 @@ const MovieCard: FC<MovieCardProps> = ({
         <button
           type="button"
           className="movie-card__overview-favorite"
-          onClick={(e) => {
-            e.preventDefault();
-            toggleFavorite();
-          }}
+          onClick={handleClick}
           aria-label="favorite"
         >
           <Heart />

@@ -16,6 +16,8 @@ const useMovieSearch = (query: string, page: number) => {
   const [, setSearchTotalResults] = useAtom(searchTotalResultsAtom);
 
   useEffect(() => {
+    if (!query) return;
+
     setLoading(true);
     setError(false);
 

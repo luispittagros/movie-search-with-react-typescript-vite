@@ -1,34 +1,39 @@
 import { useEffect, useState } from 'react';
 
-type FavoriteMovie = {
+export type FavoriteMovie = {
   id: string;
+  title: string;
+  poster: string;
+  year: string;
 };
 
-const useToggleFavoriteMovie = (id: string): [boolean, () => void] => {
+const storeKey = 'FavoriteMovies';
+
+export const getFavoriteMovies = (): FavoriteMovie[] => {
+  const favoriteMovies = localStorage.getItem(storeKey);
+  return favoriteMovies ? (JSON.parse(favoriteMovies) as FavoriteMovie[]) : [];
+};
+
+const useToggleFavoriteMovie = (
+  id: string,
+): [boolean, ({ title, poster, year }: FavoriteMovie) => void] => {
   const [isFavorite, setIsFavorite] = useState(false);
-
-  const storeKey = 'FavoriteMovies';
-
-  const storedFavoriteMovies = (): FavoriteMovie[] => {
-    const favoriteMovies = localStorage.getItem(storeKey);
-    return favoriteMovies
-      ? (JSON.parse(favoriteMovies) as FavoriteMovie[])
-      : [];
-  };
 
   const storeFavoriteMovies = (movies: FavoriteMovie[]): void => {
     localStorage.setItem(storeKey, JSON.stringify(movies));
   };
 
-  const toggleFavorite = () => {
-    let movies = storedFavoriteMovies();
+  const toggleFavorite = ({ title, poster, year }: FavoriteMovie) => {
+    let movies = getFavoriteMovies();
 
-    const favoriteMovieIndex = movies.findIndex((movie) => movie.id === id);
+    const favoriteMovieIndex = movies.findIndex(
+      ({ id: movieId }) => movieId === id,
+    );
 
     if (favoriteMovieIndex > -1) {
-      movies = movies.filter((movie) => movie.id !== id);
+      movies = movies.filter(({ id: movieId }) => movieId !== id);
     } else {
-      movies.push({ id });
+      movies.push({ id, title, poster, year });
     }
 
     setIsFavorite(favoriteMovieIndex === -1);
@@ -36,8 +41,8 @@ const useToggleFavoriteMovie = (id: string): [boolean, () => void] => {
   };
 
   useEffect(() => {
-    const movies = storedFavoriteMovies();
-    const isFavoriteMovie = movies.some((movie) => movie.id === id);
+    const movies = getFavoriteMovies();
+    const isFavoriteMovie = movies.some(({ id: movieId }) => movieId === id);
     setIsFavorite(isFavoriteMovie);
   }, []);
 

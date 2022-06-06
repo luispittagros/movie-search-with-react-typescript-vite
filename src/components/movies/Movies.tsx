@@ -12,6 +12,8 @@ import '@/components/movies/Movies.scss';
 import Loader from '@/components/loader/Loader';
 import { useEffect, useRef } from 'react';
 import useInfiniteLoading from '@/hooks/useInfiniteLoading';
+import FavoriteMovies from '@/components/movies/FavoriteMovies';
+import EmptyMovieList from '@/components/movies/EmptyMovieList';
 
 const Movies = () => {
   const [movies] = useAtom(moviesAtom);
@@ -30,6 +32,18 @@ const Movies = () => {
       setSearchPage(searchPage + 1);
     }
   }, [loadMore, movies]);
+
+  if (!loading && !movies.length) {
+    if (searchQuery) {
+      return (
+        <EmptyMovieList
+          message={`Sorry, we did not find any movies for "${searchQuery}"`}
+        />
+      );
+    }
+
+    return <FavoriteMovies />;
+  }
 
   if (loading && !movies.length) return <Loader />;
 

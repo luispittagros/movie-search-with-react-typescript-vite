@@ -31,12 +31,6 @@ const useInfiniteLoading = (
     }
 
     currentObserver.current = observer.current;
-
-    return () => {
-      if (currentElement.current) {
-        currentObserver.current.unobserve(currentElement.current);
-      }
-    };
   }, [element, element.current?.lastElementChild]);
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAtom } from 'jotai';
 
@@ -47,9 +47,22 @@ const Movie = () => {
     };
 
     fetchData().then(setMovie).catch(console.error);
+
+    return () => setMovie(null);
   }, [setMovie, id]);
 
-  if (!movie) return <div>Movie not found</div>;
+  const handleFavorite = useCallback(() => {
+    if (!movie) return;
+
+    toggleFavorite({
+      id,
+      title: movie.title,
+      poster: movie.poster,
+      year: movie.year,
+    });
+  }, [toggleFavorite, movie]);
+
+  if (!movie) return <h1>Sorry, the movie was not found</h1>;
 
   return (
     <>
@@ -81,7 +94,7 @@ const Movie = () => {
             <Button
               icon={<Heart />}
               active={isFavorite}
-              onClick={toggleFavorite}
+              onClick={handleFavorite}
             >
               Add to favourites
             </Button>

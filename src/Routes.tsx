@@ -1,4 +1,4 @@
-import { useRoutes } from 'react-router-dom';
+import { useRoutes, Navigate } from 'react-router-dom';
 import Layout from '@/layouts/Layout';
 import Home from '@/views/Home';
 import Movie from '@/views/Movie';
@@ -12,6 +12,10 @@ const Routes = () => {
         {
           path: '/',
           element: <Home />,
+        },
+        {
+          path: '/movies',
+          element: <Navigate to="/" />,
         },
         {
           path: '/movies/:id',

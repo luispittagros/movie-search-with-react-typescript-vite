@@ -12,7 +12,7 @@ export const searchPageAtom = atom(1);
 
 export const searchTotalResultsAtom = atom(0);
 
-export const movieAtom = atom<Movie>({} as Movie);
+export const movieAtom = atom<Movie | null>(null);
 
 export const hasMoreAtom = atom(
   (get) => get(searchTotalResultsAtom) > get(searchPageAtom) * 10,
