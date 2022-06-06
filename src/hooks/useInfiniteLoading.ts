@@ -1,8 +1,10 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 
-const useInfiniteLoading = (
-  element: MutableRefObject<HTMLUListElement | null>,
-) => {
+const useInfiniteLoading = <T extends Element>(): [
+  boolean,
+  MutableRefObject<T | null>,
+] => {
+  const element = useRef<T | null>(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [loadMore, setLoadMore] = useState(false);
 
@@ -22,7 +24,7 @@ const useInfiniteLoading = (
   const currentElement = useRef(element.current?.lastElementChild);
 
   useEffect(() => {
-    if (!element?.current?.lastElementChild) return () => {};
+    if (!element?.current?.lastElementChild) return;
 
     if (currentElement?.current !== element.current.lastElementChild) {
       currentObserver.current.disconnect();
@@ -37,7 +39,7 @@ const useInfiniteLoading = (
     setLoadMore(isIntersecting);
   }, [isIntersecting]);
 
-  return [loadMore];
+  return [loadMore, element];
 };
 
 export default useInfiniteLoading;
