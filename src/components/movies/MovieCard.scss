@@ -46,6 +46,24 @@
     }
   }
 
+  &--no-poster {
+    position: relative;
+
+    &:before {
+      content: 'No Preview';
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: absolute;
+      font-family: var(--font-family);
+      color: var(--text-secondary);
+      z-index: 1;
+    }
+  }
+
   &:hover {
     #{$card}__overview {
       opacity: 1;
@@ -64,6 +82,7 @@
     transition: 0.3s ease-out;
     flex: 1;
     padding: 12px;
+    z-index: 2;
 
     &-favorite {
       border-radius: 50%;

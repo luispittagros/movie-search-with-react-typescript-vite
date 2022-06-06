@@ -33,8 +33,12 @@ const MovieCard: FC<MovieCardProps> = ({
 
   return (
     <li
-      className={clsx('movie-card', isFavorite && 'movie-card--favorite')}
-      style={{ backgroundImage: `url(${poster})` }}
+      className={clsx(
+        'movie-card',
+        isFavorite && 'movie-card--favorite',
+        poster === 'N/A' && 'movie-card--no-poster',
+      )}
+      style={{ backgroundImage: poster !== 'N/A' ? `url(${poster})` : '' }}
     >
       <Link to={moviesPath} className="movie-card__overview">
         <button
