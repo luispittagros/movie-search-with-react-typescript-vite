@@ -1,6 +1,7 @@
 import '@/components/movies/EmptyMovieList.scss';
 import { FC } from 'react';
 import PropTypes from 'prop-types';
+import EmptyState from '@/assets/img/illustration-empty-state.png';
 
 interface EmptyMovieListProps {
   message?: string;
@@ -9,10 +10,7 @@ interface EmptyMovieListProps {
 const EmptyMovieList: FC<EmptyMovieListProps> = ({ message }) => {
   return (
     <div className="empty-movie-list">
-      <img
-        src="/src/assets/img/illustration-empty-state.png"
-        alt="No movies to show"
-      />
+      <img src={EmptyState} alt="No movies to show" />
 
       {message && <p>{message}</p>}
     </div>
