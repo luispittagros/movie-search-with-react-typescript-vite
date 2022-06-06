@@ -1,8 +1,7 @@
-import { ChangeEvent, FC, useCallback } from 'react';
+import { ChangeEvent, FC, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useAtom } from 'jotai';
 import clsx from 'clsx';
-import debounce from 'lodash.debounce';
 import useMovieSearch from '@/hooks/useMovieSearch';
 import { searchQueryAtom, searchPageAtom, moviesAtom } from '@/store/movies';
 
@@ -18,22 +17,34 @@ const defaultProps = {
   disabled: false,
 };
 
+const debounce = (fn: (...args: any[]) => void, delay: number) => {
+  let timeoutId: NodeJS.Timeout | string;
+  return (...args: unknown[]) => {
+    if (timeoutId) clearInterval(timeoutId);
+    timeoutId = setTimeout(() => fn(...args), delay);
+  };
+};
+
 const SearchBar: FC<SearchBarProps> = ({ disabled }) => {
+  const [, setMovies] = useAtom(moviesAtom);
   const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
   const [searchPage, setSearchPage] = useAtom(searchPageAtom);
-  const [, setMovies] = useAtom(moviesAtom);
+  const [query, setQuery] = useState(searchQuery);
 
-  const handleChange = debounce(
-    useCallback(
-      (e: ChangeEvent<HTMLInputElement>) => {
-        setMovies([]);
-        setSearchPage(1);
-        setSearchQuery(e.target.value);
-      },
-      [setMovies, setSearchPage, setSearchQuery],
-    ),
-    350,
+  const debounceCallback = useCallback(
+    debounce((value: string) => {
+      setMovies([]);
+      setSearchPage(1);
+      setSearchQuery(value);
+    }, 350),
+    [],
   );
+
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setQuery(value);
+    debounceCallback(value);
+  };
 
   useMovieSearch(searchQuery, searchPage);
 
@@ -44,7 +55,8 @@ const SearchBar: FC<SearchBarProps> = ({ disabled }) => {
       <input
         type="text"
         placeholder="Search movies..."
-        onChange={handleChange}
+        onChange={changeHandler}
+        value={query}
         disabled={disabled}
       />
     </div>
