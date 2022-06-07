@@ -33,7 +33,6 @@ const useMovieSearch = (query: string, page: number) => {
         }));
 
         setSearchTotalResults(+totalResults);
-        setLoading(false);
 
         if (results) setMovies([...movies, ...results]);
       })
