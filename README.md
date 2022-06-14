@@ -44,6 +44,6 @@ API Settings can be changed in `.env` file.
 - [Axios](https://github.com/axios/axios)
 - [Jotai](https://jotai.org/)
 
-### Preview
+## Preview
 
 [https://movie-search-with-react-typescript-vite.vercel.app](https://movie-search-with-react-typescript-vite.vercel.app)
