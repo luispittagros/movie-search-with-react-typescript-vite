@@ -43,3 +43,7 @@ API Settings can be changed in `.env` file.
 - [Sass](https://sass-lang.com/)
 - [Axios](https://github.com/axios/axios)
 - [Jotai](https://jotai.org/)
+
+### Preview
+
+[https://movie-search-with-react-typescript-vite.vercel.app](https://movie-search-with-react-typescript-vite.vercel.app)
